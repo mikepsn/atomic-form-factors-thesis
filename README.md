@@ -25,5 +25,5 @@ This is because the seminar package doesn't work with pdflatex.
 
 Direct links to the thesis and the presentation can be found here:
 
-* [Computing Relativistic Atomic Form Factors (Thesis)(PDF)]()
-* [Computing Relativistic Atomic Form Factors (Slides)(PDF)]()
+* [Computing Relativistic Atomic Form Factors (Thesis)(PDF)](https://github.com/mikepsn/atomic-form-factors-thesis/blob/master/report.pdf?raw=true)
+* [Computing Relativistic Atomic Form Factors (Slides)(PDF)](https://github.com/mikepsn/atomic-form-factors-thesis/blob/master/land.pdf?raw=true)
