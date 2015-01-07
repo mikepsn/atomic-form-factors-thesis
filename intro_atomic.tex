@@ -1,0 +1,493 @@
+%============================================================================
+% ATOMIC STRUCTURE DEFINITIONS AND CONSTANTS
+%============================================================================
+
+This section describes the atomic structure information required for the form
+factor calculations such as physical constants, definitions, atomic energy
+levels and atomic wave functions.
+
+%============================================================================
+% CONSTANTS
+%============================================================================
+\section{Constants and Definitions}
+We first need to define the usual symbols which are common in atomic physics.
+\begin{center}
+\begin{tabular}{|c|l|} \hline
+    Symbol                  &   Meaning                     \\ \hline \hline
+    $c$                     &   Speed Of Light              \\
+    $e$                     &   Electron Charge             \\
+    $m$                     &   Electron Mass               \\
+    $a_0$                   &   Bohr Radius                 \\ 
+    $\alpha$                &   Fine Structure Constant     \\
+    $\hbar$                 &   Planck's Constant/$2\pi$    \\
+    $r_0$                   &   Classical Electron Radius   \\
+    $Z$                     &   Atomic Number               \\
+    $Y_{lm}(\theta,\phi)$   &   Spherical Harmonics         \\
+    \hline
+\end{tabular}
+\end{center}
+We will use $\mb{k} = (k_x,k_y,k_z)$ to represent the photon wave propagation
+vector, and in the case of photoionisation, we will use $\mb{k'} =
+(k'_x,k'_y,k'_z)$ for the wave-vector of the ejected electron.
+Electronic coordinates with respect to the nucleus will be denoted by 
+$\mb{r} = (r,\theta,\phi)$ whereas the ejection angles of a photo-electron will
+be denoted by $\Omega = (\Theta,\Phi)$.
+In order to avoid confusion with the fine structure constant $\alpha$,
+the Dirac alpha matrix will be denoted by $\Alpha$ where
+\begin{equation}
+    \Alpha = 
+    \left(
+        \begin{array}{cc}
+            0                           &   \mbox{\boldmath $\sigma$} \\
+            \mbox{\boldmath $\sigma$}   &   0
+        \end{array}
+    \right)
+\end{equation}
+and where $\mbox{\boldmath $\sigma$}$ are the Pauli spin matrices.
+
+When dealing with four component spinors the following definitions have been
+adopted.
+\begin{itemize}
+    \item $\ket{i}$ denotes the $i^{\mathrm{th}}$ state of an atom. For example,
+          $\ket{0}$ denotes the ground state, $\ket{1}$ denotes the first
+          excited state etc. $\ket{c}$ denotes the continuum or free electron
+          state. The state $\ket{i}$ may also be written as $\psi_i$.
+    \item $\psi_{ij}$ denotes the $j^{\mathrm{th}}$ component of the 
+          $i^{\mathrm{th}}$ atomic state.
+    \item $g_i(r)$ and $h_i(r)$ denote the radial components of the $i^{\mathrm{th}}$
+          atomic state.
+    \item $A_{ij}(\theta,\phi)$ denotes the $j^{\mathrm{th}}$ angular component of the 
+          $i^{\mathrm{th}}$ atomic state.
+
+\end{itemize}
+\begin{equation}
+    \begin{array}{cc}
+        \gamma_1 = \sqrt{1 - (\alpha Z)^2} &  \gamma_2 = \sqrt{4 - (\alpha Z)^2}
+    \end{array}
+\end{equation}
+\begin{equation}
+    \begin{array}{cccc}
+        N_1 = 1 ;& N_2 = \sqrt{2(1 + \gamma_1)} ;& N_3 = 2
+        ;&
+        \sigma_1 = \left( \frac{2Z}{N_1 a_0} \right)
+    \end{array}
+\end{equation}
+\begin{equation}
+    \begin{array}{ccc}
+        \epsilon_1 = 
+            \left[ 
+                1 + \left( \frac{\alpha Z}{\gamma_1} \right)^2
+            \right]^{-1/2}
+        &
+        \epsilon_2 =
+            \left[ 
+                1 + \left( \frac{\alpha Z}{1+\gamma_1} \right)^2
+            \right]^{-1/2}
+        &
+        \epsilon_3 = 
+            \left[ 
+                1 + \left( \frac{\alpha Z}{\gamma_2} \right)^2
+            \right]^{-1/2}
+    \end{array}
+\end{equation}
+
+
+%============================================================================
+% SCHRODINGER EQUATION
+%============================================================================
+\section{The Schr\"odinger Equation and Non Relativistic Wave-functions}
+    The Schr\"odinger equation for an electron in a Coulomb potential describes
+    the non relativistic structure of a hydrogen atom.
+    Ignoring fine structure corrections, the equation can be written as:
+    \begin{equation}
+        \left[
+            -\frac{\hbar^2}{2m} \nabla^2 - \frac{Ze}{r}
+        \right] \psi(\mb{r}) = E \psi(\mb{r})
+    \end{equation}
+    Solutions to this equation~\cite{Bransden-Joachain} give the energy levels 
+    of the hydrogen atom as a function of the principal quantum number $n$
+    \begin{equation}
+        E_n = - \frac{e^2}{4\pi\epsilon_0 a_0} \frac{Z^2}{2n^2}
+    \end{equation}
+    and wave functions as a function of the three space variables
+    $r$, $\theta$ and $\phi$ and the three quantum numbers $n$,$l$ and $m$.
+    \begin{equation}
+        \psi_{nlm}(r,\theta,\phi) = R_{nl}(r) Y_{lm}(\theta,\phi)
+        =
+        - \sqrt{
+            \left(
+                \frac{2Z}{n a_0}
+            \right)^3
+            \frac{(n - l - 1)!}{2n [(n+l)!]^3}
+        }
+        e^{-\rho/2} \rho^l L^{2l+1}_{n+l}(\rho) Y_{lm}(\theta,\phi)
+    \end{equation}
+    where $\rho = 2Zr/na_0$, $a_0 = 4\pi\epsilon_0\hbar^2 / e^2 m$,
+    $Y_{lm}(\theta,\phi)$ are the spherical harmonics and 
+    $L^{2l+1}_{n+l}(\rho)$ are the associated Laguerre
+    polynomials~\cite{Bransden-Joachain}.
+
+    For example, the ground state wave-function of hydrogen 
+    ($\psi_{1s}$ or $\psi_{100}$) is defined as:
+   	\begin{equation} \label{eq:schrodinger-ground}
+		\psi_{1s}(r,\theta,\phi) = \frac{1}{\sqrt{\pi}}
+								   \left( \frac{Z}{a_0} \right)^{3/2}
+								   e^{-Zr/a_0} .
+	\end{equation}
+
+%============================================================================
+% DIRAC EQUATION
+%============================================================================
+\section{The Dirac Equation and Relativistic Wave-functions}
+    In order to obtain more accurate energy levels and wave-functions for
+    hydrogen, the effects of special relativity which give rise to the fine
+    structure in the hydrogen spectrum need to be considered. and as such
+    the solutions to the Dirac equation for an electron in a central coulombic
+    field need to be used.
+    The Dirac equation is shown here (where $\psi$ is a four component spinor
+    wave-functions) together with its energy eigenvalue $E_{nj}$
+    for hydrogenic atoms.
+    \begin{equation} \label{eq:dirac-equation}
+    \begin{array}{lcr}
+        \left[
+            e \Alpha \cdot \mb{p} + \beta mc^2 - \frac{Ze^2}{r}
+        \right] \psi = E_{nj} \psi
+    &
+    \; ; \;
+    &
+    E_{nj} = \frac{mc^2}{
+                \sqrt{
+                    1 + \frac{(Z\alpha)^2}{n-j-\frac{1}{2} +
+                    \sqrt{(j+\frac{1}{2})^2 - (Z\alpha)^2} }
+                }
+             }
+    \end{array}
+    \end{equation}
+    Solutions to the Dirac equation for hydrogenic atoms are written in terms of
+    four component spinors, separated in radial and angular components as
+    defined in~\cite{Bethe-Salpeter}. 
+    There are two general spinor solutions $\psi_a$ corresponding to the case
+    when $j=l+1/2$ and $\psi_b$ for the case when $j=l-1/2$.
+    Note, also that the large and small components of the radial wave-functions are 
+    denoted by $g(r)$ and $h(r)$ instead of the more traditional $g(r)$ and $f(r)$, 
+    so as to avoid confusion with equation for the form factor which uses the symbol $f$.
+    \begin{equation}
+    \begin{array}{lr}
+        \psi_a = 
+        \left(
+            \begin{array}{c}
+                g(r)    \sqrt{\frac{l+m+1/2}{2l+1}}     Y_{l,m-1/2}(\theta,\phi)    \\
+                -g(r)   \sqrt{\frac{l-m+1/2}{2l+1}}     Y_{l,m+1/2}(\theta,\phi)    \\
+                -ih(r)  \sqrt{\frac{l-m+3/2}{2l+3}}     Y_{l+1,m-1/2}(\theta,\phi)  \\
+                -ih(r)  \sqrt{\frac{l+m+3/2}{2l+3}}     Y_{l+1,m+1/2}(\theta,\phi)
+            \end{array}
+        \right)
+        &
+        \psi_b =
+        \left(
+            \begin{array}{c}
+                 g(r)   \sqrt{\frac{l-m+1/2}{2l+1}}     Y_{l,m-1/2}(\theta,\phi)    \\
+                g(r)    \sqrt{\frac{l+m+1/2}{2l+1}}     Y_{l,m+1/2}(\theta,\phi)    \\
+                -ih(r)  \sqrt{\frac{l+m-1/2}{2l-1}}     Y_{l-1,m-1/2}(\theta,\phi)  \\
+                ih(r)   \sqrt{\frac{l-m-1/2}{2l-1}}     Y_{l-1,m+1/2}(\theta,\phi)
+            \end{array}
+        \right)
+    \end{array}
+    \end{equation}
+    The radial components $g(r)$ and $f(r)$ of the spinors can be written in
+    general in terms of the hypergeometric function $F(a,b,x)$. 
+    % g(r) radial component
+    \begin{equation}
+    \begin{split}
+    g(r) = - \frac{\sqrt{\Gamma(2\gamma + n' + 1)}}{\Gamma(2\gamma+1)\sqrt{n'!}}
+             \sqrt{\frac{1+\epsilon}{4N(N-x)}} 
+             \left( \frac{2Z}{Na_0} \right)^{3/2}
+             e^{-Zr/a_0}
+             \left( \frac{2Zr}{Na_0} \right)^{\gamma-1} 
+             \\
+             \times
+             \left[
+                -n' F(-n'+1,2\gamma+1,\frac{2Zr}{Na_0})
+                +
+                (N-x) F(-n',2\gamma+1,\frac{2Zr}{Na_0})
+             \right]
+    \end{split}
+    \end{equation}
+    % h(r) radial component
+    \begin{equation}
+    \begin{split}
+    h(r) = - \frac{\sqrt{\Gamma(2\gamma+n'+1)}}{\Gamma(2\gamma+1)\sqrt{n'!}}
+             \sqrt{\frac{1-\epsilon}{4N(N-x)}}
+             \left( \frac{2Z}{Na_0} \right)^{3/2}
+             e^{-\frac{Zr}{Na_0}}
+             \left( \frac{2Zr}{Na_0} \right)^{\gamma-1}
+             \\
+             \times
+             \left[
+                n' F(-n'+1,2\gamma+1,\frac{2Zr}{Na_0})
+                + (N-x) F(-n',2\gamma+1,\frac{2Zr}{Na_0})
+             \right]
+    \end{split}
+    \end{equation}
+    Where we have $x = -(j+1/2)=-(l+1)$ if $j=l+1/2$, $x=j+1/2=+l$ if $j=l-1/2$,
+    $\gamma = \pm\sqrt{x^2 - (Z\alpha)^2}$, $\epsilon = E/E_0$ (energy/rest mass
+    energy), $n' = \alpha Z \epsilon/\sqrt{1 - \epsilon^2} - \gamma$,
+    $N = \sqrt{n^2 - 2n'(k - \sqrt{k^2 - \alpha^2 Z^2})}$, $k = |x|$, and
+    $m = \pm(l+1/2)$~\footnote{See Bethe and Salpeter~\cite{Bethe-Salpeter} for a
+    detailed explanation of all these constants and definitions}.
+
+    %========================================================================
+    % GROUND STATE
+    %========================================================================
+    \subsection{The Ground State}
+    The ground state (or $1S_{\frac{1}{2}}$) of the hydrogen atom corresponds to
+    the quantum numbers $n=1$, $l=0$ and $j=\frac{1}{2}$. This corresponds to
+    the $j = l+ \frac{1}{2}$ spinor.
+    \begin{equation} \label{eq:dirac-ground}
+	\ket{1S_{\frac{1}{2}}} = \ket{0} = 
+		\left(
+			\begin{array}{c}
+				A_{01}(\theta,\phi) \; g_0(r) \\
+				A_{02}(\theta,\phi) \; g_0(r) \\
+				A_{03}(\theta,\phi) \; h_0(r) \\
+				A_{04}(\theta,\phi) \; h_0(r)
+			\end{array}
+		\right)
+		=
+		\left(
+			\begin{array}{c}
+				Y_{00} 	g_0(r)	\\
+				0	 			\\
+				-i \sqrt{\frac{1}{3}} Y_{10} h_0(r) \\
+				-i \sqrt{\frac{2}{3}} Y_{11} h_0(r)
+			\end{array}
+		\right)
+    \end{equation}
+    %======================================================================
+    \begin{equation} \label{eq:dirac-radial}
+    \begin{array}{cc}
+		g_0(r) = G_0 e^{-\frac{1}{2} \sigma_1 r} r^{\gamma_1 - 1} &
+		h_0(r) = H_0 g_0(r) 
+    \\
+    \\
+	    H_0  =  - \sqrt{ \frac{1 - \epsilon_1}{1 + \epsilon_1} }	&
+	    G_0  =  \left( \frac{2Z}{a_0} \right)^{3/2} 
+		  	   	\sqrt{\frac{1 + \epsilon_1}{2 \Gamma(2\gamma_1 + 1) }}
+    \end{array}
+    \end{equation}
+    %======================================================================
+    % FIRST EXCITED STATE
+    %======================================================================
+    \subsection{The First Excited State}
+    \begin{equation}
+	\ket{2S_{1/2}} = \ket{1} = 
+		\left(
+			\begin{array}{c}
+				A_{11}(\theta,\phi) g_1(r) \\
+				A_{12}(\theta,\phi) g_1(r) \\
+				A_{13}(\theta,\phi) h_1(r) \\
+				A_{14}(\theta,\phi) h_1(r)
+			\end{array}
+		\right)
+		=
+		\left(
+			\begin{array}{c}
+				Y_{00} 	g_1(r)	\\
+				0	 			\\
+				-i \sqrt{\frac{1}{3}} Y_{10} h_1(r) \\
+				-i \sqrt{\frac{2}{3}} Y_{11} h_1(r)
+			\end{array}
+		\right)
+\end{equation}
+\begin{equation}
+\begin{array}{cc}
+	g_1(r) = e^{-\frac{1}{2} \sigma_2 r} r^{\gamma_1} 
+	  		  \left( G'_{1}  \frac{1}{r} - G''_{1} \right) 
+    &
+   	h_1(r) = H_1 \left( \frac{H'_1 - H''_1 r}{H'''_1 - H''''_1 r} \right) g_1(r)
+\end{array}
+\end{equation}
+
+\begin{equation*}
+\begin{array}{ccc}
+	G_1 	 =  \left( \frac{2Z}{N_2 a_0} \right)^{3/2}
+		  	  		\sqrt{\frac{2\gamma_1 + 1}{\Gamma(2\gamma_1 + 1)}} 
+		  	  		\sqrt{\frac{1 + \epsilon_2}{4N_2 (N_2 + 1)}} 
+    \; ; &
+	G'_1 	 =  N_2 G_1 \sigma_2^{\gamma_1 - 1} 
+    \; ; &
+	G''_1 	 =  \left( \frac{N_2 + 1}{2\gamma_1 + 1} \right) G_1 \sigma_2^{\gamma_1}
+\end{array}
+\end{equation*}
+\begin{equation*}
+\begin{split}
+\begin{array}{ccc}
+	H_1 	 =  -\sqrt{\frac{1 - \epsilon_2}{1 + \epsilon_2}}  
+    \; ; &
+	H'_1 	 =  (2\gamma_1 + 1)(N_2 + 2)  
+    \; ; &
+	H''_1 	 =  (N_2 + 1)\sigma_2  
+\end{array}
+\\
+\begin{array}{cc}
+	H'''_1 	 =  (2\gamma_1 + 1)N_2  
+    \; ; &
+	H''''_1  =  (N_2 + 1)\sigma_2 
+\end{array}
+\end{split}
+\end{equation*}
+
+    	%=================================================================
+		% The Second Excited State
+		%=================================================================
+    \subsection{The Second Excited State}
+    \begin{equation}
+	\ket{2P_{1/2}} = \ket{2} = 
+		\left(
+			\begin{array}{c}
+				A_{21}(\theta,\phi) g_2(r) \\
+				A_{22}(\theta,\phi) g_2(r) \\
+				A_{23}(\theta,\phi) h_2(r) \\
+				A_{24}(\theta,\phi) h_2(r)
+			\end{array}
+		\right)
+		=
+		\left(
+			\begin{array}{c}
+				\sqrt{\frac{1}{3}} Y_{10} g_2(r) \\
+			    \sqrt{\frac{2}{3}} Y_{11} g_2(r) \\
+			    -i Y_{00} h_2(r) \\
+				0
+			\end{array}
+		\right)
+\end{equation}
+
+\begin{equation}
+\begin{array}{cc}
+		g_2(r) = e^{-\frac{1}{2}\sigma_2 r} r^{\gamma_1}
+				    \left(
+						G'_2 \frac{1}{r} - G''_2
+					\right) 
+    \; ; &
+       	h_2(r) = H_2 
+			 \left(
+			 	\frac{H'_2 - H''_2 r}{H'''_2 - H''''_2 r}
+			 \right) g_2(r)
+\end{array}
+\end{equation}
+\[
+    \begin{array}{ccc}
+	G_2 	 =  \left( \frac{2Z}{N_2 a_0} \right)^{3/2}
+				  \sqrt{\frac{2\gamma_1 + 1}{\Gamma(2\gamma_1 + 1)}} 
+				  \sqrt{\frac{1+\epsilon_2}{4N_2 (N_2 - 1)}} 
+    \; ; &
+	G'_2	 =  (N_2 - 2) \sigma_2^{\gamma_1 - 1} G_2 
+    \; ; &
+	G''_2 	 =  \left( \frac{N_2 - 1}{2\gamma_1 + 1} \right) \sigma_2^{\gamma_1} G_2
+    \end{array}
+\]
+\[
+\begin{array}{cc}
+	H_2		 =  -\sqrt{\frac{1-\epsilon_2}{1+\epsilon_2}} 
+    &
+	H'_2	 =  (2\gamma_1 + 1)N_2 
+\end{array}
+\]
+\[
+\begin{array}{ccc}
+	H''_2 	 =  (N_2 - 1)\sigma_2 
+    &
+	H'''_2 	 =  (2\gamma_1 + 1)(N_2 - 2) 
+    &
+	H''''_2  =  (N_2 - 1)\sigma_2
+\end{array}
+\]
+
+    	%=================================================================
+		% The Third Excited State
+		%=================================================================
+    \subsection{The Third Excited State}
+    \begin{equation}
+	\ket{2P_{3/2}} = \ket{3} = 
+		\left(
+			\begin{array}{c}
+				A_{31}(\theta,\phi) g_3(r) \\
+				A_{32}(\theta,\phi) g_3(r) \\
+				A_{33}(\theta,\phi) h_3(r) \\
+				A_{34}(\theta,\phi) h_3(r)
+			\end{array}
+		\right)
+		=
+		\left(
+			\begin{array}{c}
+				\sqrt{\frac{2}{3}} Y_{10} g_3(r) \\
+			   -\sqrt{\frac{1}{3}} Y_{11} g_3(r) \\
+			 -i \sqrt{\frac{2}{5}} Y_{20} h_3(r) \\
+			 -i \sqrt{\frac{3}{5}} Y_{21} h_3(r)
+			\end{array}
+		\right)
+\end{equation}
+\begin{equation}
+    \begin{array}{cc}
+		g_3(r) = G_3 e^{-\frac{1}{2}\sigma_3 r}	r^{\gamma_2 - 1} 
+        \; ; &
+        h_3(r) = H_3 g_3(r)
+    \end{array}
+\end{equation}
+\[
+\begin{array}{cc}
+	G_3 =  	\left( \frac{Z}{a_0} \right)^{3/2}
+			  \sqrt{ \frac{1 + \epsilon_3}{2\Gamma(2\gamma_2 + 1)} }
+			  \sigma_3^{\gamma_2 - 1}
+    \; ; &
+	H_3  =   -\sqrt{ \frac{1 - \epsilon_3}{1 + \epsilon_3} }
+\end{array}
+\]
+
+    \subsection{The Free Dirac Electron}
+    The continuum state is described by a free Dirac electron state with energy $E$
+    and momentum wave-vector $\mb{k'} = (k'_x,k'_y,k'_z)$. 
+    Such a state, can be represented by one of the two four-component spinors below.
+    \begin{equation}
+    \begin{array}{ccccc}
+        \ket{\psi_c}_{\uparrow} = 
+        \left(
+            \begin{array}{c}
+                1                   \\
+                0                   \\
+                \xi k'_z            \\
+                \xi (k'_x + ik'_y)
+            \end{array}
+        \right)
+        & ; &
+        \ket{\psi_c}_{\downarrow} = 
+        \left(
+            \begin{array}{c}
+                0                   \\
+                1                   \\
+                \xi(k'_x - ik'_y)   \\
+                -\xi k'_z
+            \end{array}
+        \right)
+        & ; &
+        \xi = \frac{c\hbar}{E + E_0}
+    \end{array}
+    \end{equation}
+    Where we have $E$ and $E_0$ as the electron's kinetic and rest mass energy
+    respectively.
+    The $\ket{\psi_c}_{\uparrow}$ represents the electron in the spin up state,
+    whereas the $\ket{\psi_c}_{\downarrow}$ represents the electron in the spin
+    down state. 
+
+
+
+
+
+
+
+
+
+
+
+
+

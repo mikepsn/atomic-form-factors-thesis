@@ -1,0 +1,232 @@
+%-----------------------------------------------------------------------
+% PHYSICS HONOURS THESIS
+% AUTHOR    : MICHAEL PAPASIMEON
+% DATE      : NOVEMBER 1998
+%-----------------------------------------------------------------------
+
+\documentclass[a4paper,titlepage]{sfreport}
+%\documentclass[a4paper,titlepage,aps]{revtex}
+
+%-----------------------------------------------------------------------
+% LATEX PACKAGES
+%-----------------------------------------------------------------------
+\usepackage{helvet}
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{amsxtra}
+\usepackage{fancybox}
+%\usepackage{fancyheadings}
+\usepackage{fancyhdr} 
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{layout}
+%\usepackage{pslatex}
+
+%----------------------------------------------------------------------
+% PAGESTYLE
+%----------------------------------------------------------------------
+
+\pagestyle{fancyplain}
+%\setlength{\voffset}{0pt}
+%\setlength{\topmargin}{0pt}
+%\setlength{\textheight}{670pt}
+%\setlength{\marginparwidth}{0pt}
+
+%----------------------------------------------------------------------
+% LATEX MACROS
+%----------------------------------------------------------------------
+\restylefloat{table}
+
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\ket}[1]{|#1 \rangle}
+\newcommand{\bra}[1]{\langle #1|}
+\newcommand{\Alpha}{\bar{\alpha}}
+\newcommand{\Exp}[2]{e^{i \mb{#1} \cdot \mb{#2} }}
+\newcommand{\ExpM}[2]{e^{-i \mb{#1} \cdot \mb{#2} }}
+\newcommand{\state}[2]{\psi_{#1 #2}}
+\newcommand{\Muq}{\mu(\mb{q},\theta,\phi)}
+\newcommand{\Angstrom}{\stackrel{\circ}{\mathrm{A}} }
+\newcommand{\InvAngstrom}{ \stackrel{\circ}{\mathrm{A}}^{-1} } 
+\newcommand{\Half}{\frac{1}{2}}
+
+\setcounter{tocdepth}{10}
+\setcounter{secnumdepth}{10}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.3ex}
+
+%\renewcommand{\chaptername}{Part}
+\renewcommand{\contentsname}{Contents}
+\renewcommand{\bibname}{References}
+
+\newcommand{\HRule}{\rule{\textwidth}{1mm}}
+\newcommand{\Trule}{\rule{\textwidth}{0.1pt}}
+
+\newcommand{\maketitlepage}[2]{
+    \begin{titlepage}
+    \vspace*{\stretch{1}}
+    \HRule
+%    \begin{flushright}
+\begin{center}
+        {\textsf{{ \huge  #1} }}
+        \\[5mm]
+        \Trule
+        \\[5mm]
+        \Large \textsf{#2}
+\end{center}
+%    \end{flushright}
+    \HRule
+    \vspace*{\stretch{2}}
+    \begin{center}
+        \includegraphics[height=4cm]{UMCrest97.eps}
+    \end{center}
+    \begin{center}
+        \Large\textsc{1998 Physics Honours Thesis \\
+                      Optics Group, School of Physics\\
+                      The University of Melbourne \\
+                      November 16, 1998}
+    \end{center}
+    \end{titlepage}
+}
+
+\newcommand{\Section}[1]{\subsection{#1}}
+\newcommand{\Subsection}[1]{\subsubsection{#1}}
+\newcommand{\Subsubsection}[1]{\paragraph{#1}}
+
+\newenvironment{Boxedminipage}%
+    {\begin{Sbox}\begin{minipage}}%
+    {\end{minipage}\end{Sbox}\fbox{\TheSbox}}
+\newcommand{\Startbox}[1]{\begin{Boxedminipage}{\textwidth}%
+            {\large \sffamily{#1}} \vspace{1mm} \hrule \vspace{2mm} }
+\newcommand{\Endbox}{\end{Boxedminipage}}
+
+\newcommand{\bt}{\begin{center}\begin{tabular}%
+                {|>{\sffamily}m{6cm}|>{\sffamily}m{2cm}%
+                 |>{\sffamily}m{2cm}|>{\sffamily}m{2cm}|} \hline %
+                \bfseries{Requirement} & \bfseries{TCSEC} & %
+                \bfseries{ITSEC} & \bfseries{CTCPEC} \\ \hline \hline}
+\newcommand{\et}{\end{tabular}\end{center}}
+\newcommand{\cmp}[4]{#1 & #2 & #3 & #4 \\ \hline}
+
+%----------------------------------------------------------------------
+% COMMANDS TO CONSTRUCT FANCY HEADINGS
+%----------------------------------------------------------------------
+
+%\addtolength{\textwidth}{\marginparsep}
+%\addtolength{\textwidth}{\marginparwidth}
+
+%\addtolength{\headwidth}{\marginparsep}
+%\addtolength{\headwidth}{\marginparwidth}
+
+%\setlength{\footrulewidth}{0.4pt}
+%\setlength{\plainfootrulewidth}{0.4pt}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\plainheadrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.3ex}
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+\lhead[\fancyplain{\small\it\thepage}{\small\it\thepage}]%
+      {\fancyplain{\small\it\rightmark}{\small\it\rightmark}}
+\rhead[\fancyplain{\small\it\leftmark}{\small\it\leftmark}]%
+      {\fancyplain{\small\it\thepage}{\small\it\thepage}}
+\cfoot{}
+
+%----------------------------------------------------------------------
+% MAIN DOCUMENT
+%----------------------------------------------------------------------
+
+\begin{document}
+    \pagenumbering{roman}
+    \maketitlepage{Investigation of Theoretical Approaches for\\
+                   \vspace{3mm} 
+                   Computing Relativistic Atomic Form Factors}%
+                   {Author: Michael Papasimeon \\ michp@physics.unimelb.edu.au 
+                   \\[5mm]
+                   Supervisor: Dr. Christopher T. Chantler\\
+                   chantler@physics.unimelb.edu.au}
+
+    \chapter*{Abstract}
+    The calculation of accurate atomic form factors is of great importance in
+    fields such as crystallography and medicine, as they provide valuable 
+    information about how photons (especially in the X-ray regime)
+    interact with matter.
+    Theoretical methods for calculating relativistic atomic form factors 
+    are investigated with an emphasis on the Hydrogen atom.
+    New results and comparisons with other theories for relativistic normal form 
+    factors for hydrogenic atoms are presented.
+    Anomalous form factor calculations using a relativistic S-matrix approach
+    are also computed for hydrogen using an ``all-poles'' and the electric
+    dipole approximation.
+    \vspace*{10cm}
+    \hrule
+    \vspace*{5mm}
+    I authorize the Chairman of the School of Physics to make or have made a
+    copy of this report for supply to any person judged to have an
+    acceptable reason for access to the information, i.e., for research,
+    study or instruction.
+    \vspace*{10mm}
+    \begin{flushright}
+    Signature.....................................
+    \end{flushright}
+    \vspace*{5mm}
+    \hrule
+
+    \chapter*{Acknowledgements}
+    I would like to offer my greatest gratitude and thanks to my supervisor 
+    Dr. Chris Chantler, for his guidance, time, effort, suggestions, ideas, corrections,
+    for his great enthusiasm for atomic physics and for being a great guy.
+    He is the person responsible for focusing my attention as a third year
+    student onto atomic physics and therefore gave me the opportunity
+    to have an additional fascinating perspective into the physical world.
+
+    I would also like to thank my fellow honours students, in particular
+    Karen Violante, Magda Michna and Tom Hunt who I shared an office with for a
+    year, and who with I had some great times (and some stressful and worrying times
+    especially during exams).
+
+    I would also like to thank the members of the Optics group, and the
+    lecturers of my fourth year subjects, Geoff Opat, Lloyd Hollenberg, Ann
+    Roberts, Rob Scholten, Ken Amos and Rachel Webster.
+
+    \tableofcontents
+    \listoffigures
+
+    % CHAPTER 1 - INTRODUCTION
+    \chapter{PROJECT OVERVIEW AND ATOMIC FORM FACTOR THEORY}
+        \pagenumbering{arabic}
+        \input{intro_aims}
+        \input{intro_theory}
+
+    % CHAPTER 2 - ATOMIC STRUCTURE
+    \chapter{REVIEW OF ATOMIC STRUCTURE}
+        \input{intro_atomic}
+
+    % CHAPTER 3 - NORMAL FORM FACTOR FOR HYDROGENIC ATOMS
+    \chapter{NORMAL FORM FACTOR FOR HYDROGENIC ATOMS}
+        \input{normal_nonrelativistic}
+        \input{normal_relativistic}
+        \input{normal_comparison}
+
+    % CHAPTER 4 - ANOMALOUS ATOMIC FORM FACTOR FOR HYDROGENIC ATOMS
+    \chapter{ANOMALOUS FORM FACTOR FOR HYDROGENIC ATOMS}
+        \input{anomalous}
+
+    % CHAPTER 5 - BOUND-BOUND TRANSITIONS
+    \chapter{ATOMIC BOUND-BOUND TRANSITIONS}
+        \input{bound}
+
+    % CHAPTER 5 - SUMMARY OF NEW RESULTS
+    \chapter{SUMMARY OF NEW RESULTS}
+        \input{conclusion}
+
+    % BIBLIOGRAPHY
+    \bibliographystyle{acm}
+    \bibliography{references}
+
+\end{document}

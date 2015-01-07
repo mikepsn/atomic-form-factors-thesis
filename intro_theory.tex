@@ -1,0 +1,125 @@
+
+\section{Atomic Form Factor Theory}
+The atomic form factor is given by the x-ray scattering amplitude $f$ 
+which by convention separated into a number of components. 
+It is commonly written as~\cite{Chantler-Book}
+\begin{equation}
+    f = f_0 + f' + if''
+\end{equation}
+where $f_0 = f_0(q,Z)$ is known as the normal or coherent scattering amplitude
+and is a function of momentum transfer $q$ and atomic number $Z$.
+The anomalous scattering component (also known as the anomalous dispersion or
+resonant scattering component) has real and imaginary parts given by $f'$ and
+$f''$. The anomalous component is a function of the incident photon energy.
+In the literature $f'$ and $f''$ are also known as $f_1$ and $f_2$.
+
+\subsection{Normal Component}
+The normal component of the atomic form factor is defined as the Fourier
+transform of an atom's electronic charge density~\cite{Crasemann}.
+The expression for $f_0(q)$ with an atom with electronic charge density
+$\rho(\mb{r})$, is given below with the second equation being valid for the case
+of a spherically symmetric atom~\cite{Chantler-Book}.
+\begin{equation} \label{eq:nff-spherical}
+    f_0(q) = \int \rho(\mb{r}) e^{i\mb{q}\cdot\mb{r}} \; d\mb{r}
+           = \int_0^\infty \rho(r) \frac{\sin(qr)}{qr} r^2 \; dr
+\end{equation}
+The momentum transfer is defined as
+\begin{equation}
+    q = |\mb{k_{final}} - \mb{k_{initial}}| = \frac{4\pi \sin(\theta/2)}{\lambda}
+\end{equation}
+where $\lambda$ is the wavelength of the incident photon and $\theta$ is the
+scattering angle. It is conventional to measure the momentum transfer $q$
+in inverse Angstroms ($\InvAngstrom$).
+  
+\subsection{Anomalous Component}
+The imaginary part of the anomalous form factor is related to the total
+photoionisation cross section.
+\begin{equation} \label{eq:fpp-sigma}
+    f''(\omega) = \frac{\omega}{4\pi c r_0} \sigma(\omega)
+\end{equation}
+The photon energy is given by $\hbar\omega$, $c$ is the speed of light and $r_0$
+is the classical electron radius. The photionisation cross section 
+$\sigma(\omega)$ may also include cross sections from bound-bound
+transitions.
+
+The $f'$ component may be computed from the $f''$ component using a 
+dispersion relation.
+\begin{equation}
+    f'(\omega) = f'(\infty) - \frac{2}{\pi} P
+                 \int_0^\infty 
+                 \frac{\omega' f''(\omega')}{\omega^2 - {\omega'}^2} \; d\omega'
+\end{equation}
+
+\subsection{Theoretical Limitations and Assumptions}
+The theoretical calculations of atomic form factors are usually made with a
+number of limitations and/or assumptions. These fall into a number of different
+categories. Improvements to existing theories attempt to eliminate one or more
+of these assumptions or limitations.
+
+\begin{description}
+    \item[\it 1. ATOMIC STRUCTURE :] 
+    For a simple atom such as hydrogen, the quantum
+    mechanical wave-functions of an atom may be either non relativistic (standard
+    Schr\"odinger wave-functions), or relativistic (four component Dirac
+    spinors). For many-electron atoms there is still a choice between non
+    relativistic and relativistic wave-functions but additional choices have
+    to be made as how to compute these wave-functions as analytic solutions
+    are not available. Methods for computing many electron wave-functions include
+    Hartree-Fock (HF), Dirac-Hartree-Fock (DHF), Hartree-Slater (HS), 
+    Multi-Configuration-Dirac-Fock
+    (MCDF) and all orders methods which include quantum electrodynamic
+    corrections~\cite{Sapirstein}. Although issues such as the suitability of the
+    independent particle approximation (IPA) and the computational methods used
+    to determine atomic structure are important in the areas of atomic physics,
+    many body perturbation theory and computational chemistry, they are also of
+    relevance to form factor theory due to the reliance on accurate
+    computed wave-functions.
+    \item[\it 2. ELECTROMAGNETIC FIELD :]
+    The incident photon is modeled as either a classical or quantised
+    electromagnetic field. The simpler approach of using a classical
+    electromagnetic field is more common and approximations to this model
+    involve considering only the electric dipole (E1) and/or electric quadrupole
+    (E2) approximations. Alternatives includes using a relativistic multipole
+    (RMP) or an ``all-poles'' approach can be taken in
+    which no approximations to the classical electromagnetic field are made.
+    \item[\it 3. ISOLATED ATOM :]
+    Most form factor calculations are done for a single isolated atom. However,
+    experimentally it is extremely difficult if not impossible to obtain results
+    from an isolated atom. As a result, there are inherent limitations in
+    theories which consider only the case of an isolated atom. Experimentally,
+    effects such as XAFS (X-ray Anomalous Fine Structure) arise from multiple
+    scattering processes off multiple atoms.
+    \item[\it 4. PERTURBATION THEORY :]
+    Models of atom-photon interactions usually treat the electromagnetic field
+    model of the photon as a small perturbation, and such there are a number of
+    approaches in computing the required matrix elements and relevant scattering
+    amplitudes. The main issue involves the order of the perturbation theory 
+    (usually first or second order) and the type of perturbation theory used -
+    standard (time dependent or time independent), relativistic perturbation
+    theory and second order S-matrix theory which is obtained from covariant
+    perturbation theory.
+    \item[\it 5. ADDITIONAL PROCESSES :]
+    A number of processes can occur when a photon interacts with an atom. 
+    An atomic form factor calculation usually includes one or more of these
+    processes. These processes include:
+        \begin{itemize}
+            \item Photoionisation
+            \item Bound-Bound Transitions
+            \item Rayleigh (Coherent) Scattering
+            \item Compton (Incoherent) Scattering
+            \item Delbr\"uck Scattering
+            \item Pair Production
+            \item Nuclear Thomson Scattering
+        \end{itemize}
+    \item[\it 6. NUMERICAL AND COMPUTATIONAL :]
+    Form factor calculations require considerable computational work. Therefore
+    a number of numerical computation issues need to be considered. These
+    includes choices for integration and interpolation methods, numerical
+    precision, convergence and computation time.
+\end{description}
+
+
+
+
+
+

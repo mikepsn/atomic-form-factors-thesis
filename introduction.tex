@@ -1,0 +1,111 @@
+%==============================================================
+% Introduction
+\chapter{Introduction}
+%==============================================================
+\section{Background}
+The use of high energy radiation has many wide spread uses. In
+particular, radiation in the X ray regime has applications in medicine,
+astronomy and in the study of materials. 
+One way to better understand how energetic radiation such as X rays
+interact with matter is to consider the most fundamental physical
+process involved. In this case, it is the quantum mechanical scattering
+of X ray photons off a single atom.
+The theoretical calculation of the scattering form factor allows the
+determination of a number of quantities such as the scattering cross
+section and the material's attenuation coefficient. 
+
+\section{Aims}
+The main aim of this project is to compute the form factor for photons
+in the X ray regime scattering of small atoms, in particular Hydrogen
+and Helium. This is calculated using the relativistic wave-functions as
+obtained using the Dirac equation for Hydrogen and a Dirac-Hartree-Fock
+numerical approach for Helium. The two components of the form factor
+that will be computed are the normal component which has an angular
+dependence, and the anomalous component which depends on the energy of
+the incident photon.
+
+\section{Aims}
+The main aim of this project is to compute the form factor for photons
+in the X ray regime scattering of small atoms, in particular Hydrogen
+and Helium. This is calculated using the relativistic wave-functions as
+obtained using the Dirac equation for Hydrogen and a Dirac-Hartree-Fock
+numerical approach for Helium. The two components of the form factor
+that will be computed are the normal component which has an angular
+dependence, and the anomalous component which depends on the energy of
+the incident photon.
+
+\section{Atomic Form Factor}
+    \subsection{The Physical Model}
+    The scattering process considered consists of a single atom in it's
+    ground state described by a relativistic four component Dirac spinor
+    $\psi$. A photon of momentum $\mb{k}$ and a polarisation $\mb{\hat{e_n}}$
+    scatters off the atom. The two processes considered will be:
+    \begin{itemize}
+        \item Photoionisation of one of the atom's electrons.
+        \item Elastic scattering where the momentum of the scattered
+              photon $\mb{k'}$ is the same as the incident photon.
+    \end{itemize}
+
+    \subsection{Normal Component}
+    The normal component of the atomic form factor shows the angular
+    dependence of the scattering process. It can be considered as the
+    Fourier transform of the electronic charge distribution and is
+    defined as:
+    \begin{equation} \label{eq:nff-general}
+        f_0(q) = \int e^{i \mb{q} \cdot \mb{r} } \rho(\mb{r}) d\mb{r}
+    \end{equation}
+    where the momentum transfer is given by $\mb{q} = |\mb{k} - \mb{k'}|$ 
+    and $\rho(\mb{r})$ is the electron charge density. In non
+    relativistic quantum mechanics, this is defined as 
+    $\rho(\mb{r}) = \psi^{*}(\mb{r}) \psi(\mb{r})$ whereas in
+    relativistic quantum mechanics it is defined as 
+    $\rho(\mb{r}) = \psi^{\dagger}(\mb{r}) \psi(\mb{r})$.
+    In the case of a spherically symmetric atom, the normal form factor
+    is give by:
+    \begin{equation} \label{eq:nff-spherical}
+        f_0(q) = 4 \pi \int_{0}^{\infty} \rho(r) \frac{\sin (qr)}{q} r \; dr
+    \end{equation}
+
+    \subsection{Anomalous Component}
+    The anomalous component of the form factor is defined in terms of
+    the scattering amplitude. The cases that are considered are the
+    excitement of the ground state electron to a higher energy
+    unoccupied state and the excitement of the electron to the
+    continuum, that is photoionisation.
+
+    If we consider a relativistic four component spinor $\ket{B}$, which
+    is solution to a many particle Dirac equation, the second order
+    scattering amplitude (S-matrix) is given by: 
+    \begin{equation}
+        A = - \sum_P
+            \left[
+                \frac{\bra{M} O_f^* \ket{P} \bra{P} O_i \ket{N} }
+                     {E_N - E_P + \hbar \omega_i + i0_+}
+                +
+                \frac{\bra{M} O_i \ket{P} \bra{P} O_f^* \ket{N} }
+                     {E_n - E_p - \hbar \omega_f - i0_+}
+            \right]
+    \end{equation}
+    where $\ket{N}$ is the initial state, $\ket{M}$ is the final state,
+    and $\ket{P}$ are intermediate states. We have the following
+    definitions:
+    \begin{itemize}
+        \item $\hbar \omega_i$ is the energy of the incident photon
+        \item $\hbar \omega_f$ is the energy of the scattered photon
+        \item $E_N, E_M, E_P$ are the energies of the initial, final 
+              and the intermediate states respectively.
+        \item $0_+$ is a small positive number.             
+    \end{itemize}
+    The photon absorption operator $O_{i}$ and the photon emission
+    operator $O_{f}^{*}$ are defined as:
+    \begin{equation}
+        O_i = \sum_j q_j \; \mb{\alpha} \cdot \hat{\epsilon}_i \;
+              e^{i \mb{k_i} \cdot \mb{r_j} }
+    \end{equation}
+    \begin{equation}
+        O_{f}^{*} = \sum_j q_j \; \mb{\alpha} \cdot \hat{\epsilon}_j \;
+            e^{i \mb{k_f} \cdot \mb{r_j} }
+    \end{equation}
+    with $\mb{\alpha}$ is the Dirac alpha matrix operator and
+    $\hat{\epsilon}_k$ is the polarisation of the photon.
+

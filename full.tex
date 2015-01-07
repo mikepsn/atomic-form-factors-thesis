@@ -1,0 +1,1046 @@
+%-----------------------------------------------------------------------
+% THESIS
+% AUTHOR    : MICHAEL PAPASIMEON
+% EMAIL     : michp@physics.unimelb.edu.au
+%-----------------------------------------------------------------------
+\documentclass[a4paper,titlepage]{report}
+
+%-----------------------------------------------------------------------
+% LATEX PACKAGES
+%-----------------------------------------------------------------------
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{fancybox}
+\usepackage{fancyheadings}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage[dvips]{graphicx}
+\usepackage{pslatex}
+
+%----------------------------------------------------------------------
+% PAGESTYLE
+%----------------------------------------------------------------------
+
+\pagestyle{fancyplain}
+
+%----------------------------------------------------------------------
+% LATEX MACROS
+%----------------------------------------------------------------------
+\restylefloat{table}
+
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\ket}[1]{|#1 \rangle}
+\newcommand{\bra}[1]{\langle #1|}
+
+\setcounter{tocdepth}{10}
+\setcounter{secnumdepth}{10}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.3ex}
+
+\renewcommand{\chaptername}{Section}
+\renewcommand{\contentsname}{Table of Contents}
+\renewcommand{\bibname}{References}
+
+\newcommand{\HRule}{\rule{\textwidth}{1mm}}
+\newcommand{\Trule}{\rule{\textwidth}{0.1pt}}
+
+\newcommand{\maketitlepage}[2]{
+    \begin{titlepage}
+    \vspace*{\stretch{1}}
+    \HRule
+    \begin{flushright}
+        {\textsf{{ \Huge  #1} }}
+        \\[5mm]
+        \Trule
+        \\[5mm]
+        \Large \textsf{#2}
+    \end{flushright}
+    \HRule
+    \vspace*{\stretch{2}}
+    \begin{center}
+        \Large\textsc{640-497 Advanced Research Project\\
+                      Optics Group, 
+                      School of Physics\\
+                      The University of Melbourne \\
+                      \today}
+    \end{center}
+    \end{titlepage}
+}
+
+\newcommand{\Section}[1]{\subsection{#1}}
+\newcommand{\Subsection}[1]{\subsubsection{#1}}
+\newcommand{\Subsubsection}[1]{\paragraph{#1}}
+
+\newenvironment{Boxedminipage}%
+    {\begin{Sbox}\begin{minipage}}%
+    {\end{minipage}\end{Sbox}\fbox{\TheSbox}}
+\newcommand{\Startbox}[1]{\begin{Boxedminipage}{\textwidth}%
+            {\large \sffamily{#1}} \vspace{1mm} \hrule \vspace{2mm} }
+\newcommand{\Endbox}{\end{Boxedminipage}}
+
+\newcommand{\bt}{\begin{center}\begin{tabular}%
+                {|>{\sffamily}m{6cm}|>{\sffamily}m{2cm}%
+                 |>{\sffamily}m{2cm}|>{\sffamily}m{2cm}|} \hline %
+                \bfseries{Requirement} & \bfseries{TCSEC} & %
+                \bfseries{ITSEC} & \bfseries{CTCPEC} \\ \hline \hline}
+\newcommand{\et}{\end{tabular}\end{center}}
+\newcommand{\cmp}[4]{#1 & #2 & #3 & #4 \\ \hline}
+
+%----------------------------------------------------------------------
+% COMMANDS TO CONSTRUCT FANCY HEADINGS
+%----------------------------------------------------------------------
+
+\addtolength{\headwidth}{\marginparsep}
+\addtolength{\headwidth}{\marginparwidth}
+\setlength{\footrulewidth}{0.4pt}
+\setlength{\plainfootrulewidth}{0.4pt}
+\setlength{\headrulewidth}{0.4pt}
+\setlength{\plainheadrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.3ex}
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+\lhead[\fancyplain{\sffamily\thepage}{\sffamily\thepage}]%
+      {\fancyplain{\sffamily\rightmark}{\sffamily\rightmark}}
+\rhead[\fancyplain{\sffamily\leftmark}{\sffamily\leftmark}]%
+      {\fancyplain{\sffamily\thepage}{\sffamily\thepage}}
+\cfoot{}
+
+%----------------------------------------------------------------------
+% MAIN DOCUMENT
+%----------------------------------------------------------------------
+
+\begin{document}
+    \maketitlepage{Theoretical Determination of\\
+                   \vspace{1mm} 
+                   Relativistic Atomic Form Factors\\
+                   \vspace{5mm}
+                   for Low Z Atoms in the X Ray Regime}%
+                   {Michael Papasimeon \\ michp@physics.unimelb.edu.au 
+                   \\[5mm]
+                   Supervisor: Dr. C.T. Chantler\\
+                   chantler@physics.unimelb.edu.au}
+    \begin{abstract}
+        Form Factor
+    \end{abstract}
+    \tableofcontents
+    \listoftables
+    \newpage
+
+%==============================================================
+% Introduction
+\chapter{Introduction}
+%==============================================================
+\section{Background}
+The use of high energy radiation has many wide spread uses. In
+particular, radiation in the X ray regime has applications in medicine,
+astronomy and in the study of materials. 
+One way to better understand how energetic radiation such as X rays
+interact with matter is to consider the most fundamental physical
+process involved. In this case, it is the quantum mechanical scattering
+of X ray photons off a single atom.
+The theoretical calculation of the scattering form factor allows the
+determination of a number of quantities such as the scattering cross
+section and the material's attenuation coefficient. 
+
+\section{Aims}
+The main aim of this project is to compute the form factor for photons
+in the X ray regime scattering of small atoms, in particular Hydrogen
+and Helium. This is calculated using the relativistic wave-functions as
+obtained using the Dirac equation for Hydrogen and a Dirac-Hartree-Fock
+numerical approach for Helium. The two components of the form factor
+that will be computed are the normal component which has an angular
+dependence, and the anomalous component which depends on the energy of
+the incident photon.
+
+\section{Atomic Form Factor}
+	\subsection{The Physical Model}
+	The scattering process considered consists of a single atom in it's
+	ground state described by a relativistic four component Dirac spinor
+	$\psi$. A photon of momentum $\mb{k}$ and a polarisation $\mb{\hat{e_n}}$
+	scatters off the atom. The two processes considered will be:
+	\begin{itemize}
+		\item Photoionisation of one of the atom's electrons.
+		\item Elastic scattering where the momentum of the scattered
+			  photon $\mb{k'}$ is the same as the incident photon.
+	\end{itemize}
+
+	\subsection{Normal Component}
+	The normal component of the atomic form factor shows the angular
+	dependence of the scattering process. It can be considered as the
+	Fourier transform of the electronic charge distribution and is
+	defined as:
+	\begin{equation} \label{eq:nff-general}
+		f_0(q) = \int e^{i \mb{q} \cdot \mb{r} } \rho(\mb{r}) d\mb{r}
+	\end{equation}
+	where the momentum transfer is given by $\mb{q} = |\mb{k} - \mb{k'}|$ 
+	and $\rho(\mb{r})$ is the electron charge density. In non
+	relativistic quantum mechanics, this is defined as 
+	$\rho(\mb{r}) = \psi^{*}(\mb{r}) \psi(\mb{r})$ whereas in
+	relativistic quantum mechanics it is defined as 
+	$\rho(\mb{r}) = \psi^{\dagger}(\mb{r}) \psi(\mb{r})$.
+	In the case of a spherically symmetric atom, the normal form factor
+	is give by:
+	\begin{equation} \label{eq:nff-spherical}
+		f_0(q) = 4 \pi \int_{0}^{\infty} \rho(r) \frac{\sin (qr)}{q} r \; dr
+	\end{equation}
+
+	\subsection{Anomalous Component}
+	The anomalous component of the form factor is defined in terms of
+	the scattering amplitude. The cases that are considered are the
+	excitement of the ground state electron to a higher energy
+	unoccupied state and the excitement of the electron to the
+	continuum, that is photoionisation.
+
+	If we consider a relativistic four component spinor $\ket{B}$, which
+	is solution to a many particle Dirac equation, the second order
+	scattering amplitude (S-matrix) is given by: 
+	\begin{equation}
+		A = - \sum_P
+			\left[
+				\frac{\bra{M} O_f^* \ket{P} \bra{P} O_i \ket{N} }
+					 {E_N - E_P + \hbar \omega_i + i0_+}
+				+
+				\frac{\bra{M} O_i \ket{P} \bra{P} O_f^* \ket{N} }
+					 {E_n - E_p - \hbar \omega_f - i0_+}
+			\right]
+	\end{equation}
+	where $\ket{N}$ is the initial state, $\ket{M}$ is the final state,
+	and $\ket{P}$ are intermediate states. We have the following
+	definitions:
+	\begin{itemize}
+		\item $\hbar \omega_i$ is the energy of the incident photon
+		\item $\hbar \omega_f$ is the energy of the scattered photon
+		\item $E_N, E_M, E_P$ are the energies of the initial, final 
+			  and the intermediate states respectively.
+		\item $0_+$ is a small positive number.			  	
+	\end{itemize}
+	The photon absorption operator $O_{i}$ and the photon emission
+	operator $O_{f}^{*}$ are defined as:
+	\begin{equation}
+		O_i = \sum_j q_j \; \mb{\alpha} \cdot \hat{\epsilon}_i \;
+			  e^{i \mb{k_i} \cdot \mb{r_j} }
+	\end{equation}
+	\begin{equation}
+		O_{f}^{*} = \sum_j q_j \; \mb{\alpha} \cdot \hat{\epsilon}_j \;
+			e^{i \mb{k_f} \cdot \mb{r_j} }
+	\end{equation}
+	with $\mb{\alpha}$ is the Dirac alpha matrix operator and
+	$\hat{\epsilon}_k$ is the polarisation of the photon.
+
+%==============================================================
+% Hydrogen
+\chapter{Hydrogenic Atoms}
+%==============================================================
+
+\section{Atomic Structure of Hydrogenic Atoms}
+	\subsection{Non Relativistic Atomic Structure}
+	From Schr\"odinger's equation, we know the ground state of
+	hydrogenic atoms is given by:
+	\begin{equation} \label{eq:schrodinger-ground}
+		\psi_{1s}(r,\theta,\phi) = \frac{1}{\sqrt{\pi}}
+								   \left( \frac{Z}{a_0} \right)^{3/2}
+								   e^{-Zr/a_0}
+	\end{equation}
+	where $Z$ is the atomic number and $a_0$ is the Bohr radius.
+
+	\subsection{Relativistic Atomic Structure}
+		The relativistic atomic structure of hydrogenic atoms is given
+		by the Dirac equation:
+		\marginpar{\em Fix Dirac equation}
+		\begin{equation}
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			%%%%% FIX THE DIRAC EQUATION FOR HYDROGEN
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			[ e \mb{\alpha} \cdot \mb{p} + \mb{\beta}mc^2 - \frac{Ze^2}{r}] \psi = E\psi
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\end{equation}
+		where $\psi$ is a four component spinor.
+		Solving the Dirac equation for the Hydrogen atom gives the fine
+		structure energy levels:
+		\begin{equation}
+			E_{nj} = mc^2 \left\{
+					\left[
+						1 + 
+						\left(
+							\frac{Z \alpha}
+								 {n - j - \frac{1}{2} + 
+								  \sqrt{(j+\frac{1}{2})^2 - (Z \alpha)^2 } }
+						\right)^2
+					\right] - 1
+					\right\}
+		\end{equation}
+		We will consider the first four bound states of the hydrogen
+		atom and denote them as shown in table~\ref{tbl:hstates}.
+\begin{table} 
+\begin{center}
+\begin{tabularx}{\linewidth}{|X|X|X|X|X|X|}	\hline 
+State 	& 				& 					    & $n$ & $l$ & $j$ \\ \hline \hline
+Ground	&	$\ket{0}$	& $1s_{\frac{1}{2}}$	& 1   & 0   & $\frac{1}{2}$ \\ 
+1st		&	$\ket{1}$ 	& $2s_{\frac{1}{2}}$	& 1   & 0   & $\frac{1}{2}$ \\ 
+2nd		&	$\ket{2}$	& $2p_{\frac{1}{2}}$	& 1   & 1   & $\frac{1}{2}$ \\ 
+3rd		&	$\ket{3}$	& $2p_{\frac{3}{2}}$	& 1   & 1   & $\frac{3}{2}$ \\ \hline
+\end{tabularx}
+\caption{First Four States of Hydrogenic Atoms}
+\label{tbl:hstates}
+\end{center}
+\end{table}
+
+	The first four states of the hydrogen atom are listed below in the four
+	component spinor formalism. These are the states of the K and L shells of
+	the Hydrogen atom. A number of definitions have been made in order
+	to simplify the equations. These definitions include:
+	\begin{itemize}
+		\item $Z$ is the atomic number.
+		\item $a_0$ is the Bohr radius.
+		\item $\alpha$ is the fine structure constant.
+	\end{itemize}
+	\begin{eqnarray}
+		\gamma_1	& = &	\sqrt{1 - \alpha^2 Z^2}		\\
+		\gamma_2	& = &  	\sqrt{4 - \alpha^2 Z^2}		\\
+		N_1			& = &	1							\\
+		N_2			& = &	\sqrt{2(1+\gamma_1)}		\\
+		N_3			& = &	2							\\
+		\epsilon_1	& = &	\left[ 
+							1 + \left( 
+								\frac{\alpha Z}{\gamma_1}
+							\right)^2
+							\right]^{-1/2}				\\
+		\epsilon_2	& = &	\left[
+							1 + \left( 
+								\frac{\alpha Z}{1 + \gamma_1}
+							\right)^2
+							\right]^{-1/2}				\\
+		\epsilon_3	& = &	\left[
+							1 + \left(
+								\frac{\alpha Z}{\gamma_2}
+								\right)^2
+							\right]^{-1/2}				\\	
+		\sigma_1	& = &	\left(
+								\frac{2Z}{N_1 a_0}	
+							\right)
+	\end{eqnarray}
+
+		%=================================================================
+		% The Ground State
+		%=================================================================
+		\subsubsection{The Ground State}
+\begin{equation} \label{eq:dirac-ground}
+	\ket{0} = 
+		\left(
+			\begin{array}{c}
+				A_{01} g_0(r) \\
+				A_{02} g_0(r) \\
+				A_{03} f_0(r) \\
+				A_{04} f_0(r)
+			\end{array}
+		\right)
+		=
+		\left(
+			\begin{array}{c}
+				Y_{00} 	g_0(r)	\\
+				0	 			\\
+				-i \sqrt{\frac{1}{3}} Y_{10} f_0(r) \\
+				-i \sqrt{\frac{2}{3}} Y_{11} f_0(r)
+			\end{array}
+		\right)
+\end{equation}
+
+\begin{equation} \label{eq:dirac-g0}
+	\boxed{ 
+		g_0(r) = G_0 e^{-\frac{1}{2} \sigma_1 r} r^{\gamma_1 - 1} 
+	}
+\end{equation}
+
+\begin{equation} \label{eq:dirac-f0}
+	\boxed{ 	
+		f_0(r) = F_0 g_0(r) 
+	}
+\end{equation}
+
+\begin{eqnarray*}
+	F_0 & = & - \sqrt{ \frac{1 - \epsilon_1}{1 + \epsilon_1} }	\\
+	G_0 & = & \left( \frac{2Z}{a_0} \right)^{3/2} 
+		  	   	\sqrt{\frac{1 + \epsilon_1}{2 \Gamma(2\gamma_1 + 1) }}
+\end{eqnarray*}
+
+		%=================================================================
+		% The First Excited State 
+		%=================================================================	
+		\subsubsection{The First Excited State}
+\begin{equation}
+	\ket{1} = 
+		\left(
+			\begin{array}{c}
+				A_{11} g_1(r) \\
+				A_{12} g_1(r) \\
+				A_{13} f_1(r) \\
+				A_{14} f_1(r)
+			\end{array}
+		\right)
+		=
+		\left(
+			\begin{array}{c}
+				Y_{00} 	g_1(r)	\\
+				0	 			\\
+				-i \sqrt{\frac{1}{3}} Y_{10} f_1(r) \\
+				-i \sqrt{\frac{2}{3}} Y_{11} f_1(r)
+			\end{array}
+		\right)
+\end{equation}
+\begin{equation}
+	\boxed{ g_1(r) = e^{-\frac{1}{2} \sigma_2 r} r^{\gamma_1} 
+		  		  \left( G'_{1}  \frac{1}{r} - G''_{1} \right) }
+\end{equation}
+
+\begin{eqnarray*}
+	G_1 	& = & \left( \frac{2Z}{N_2 a_0} \right)^{3/2}
+		  	  		\sqrt{\frac{2\gamma_1 + 1}{\Gamma(2\gamma_1 + 1)}} 
+		  	  		\sqrt{\frac{1 + \epsilon_2}{4N_2 (N_2 + 1)}} \\
+	G'_1 	& = & N_2 G_1 \sigma_2^{\gamma_1 - 1} \\
+	G''_1 	& = & \left( \frac{N_2 + 1}{2\gamma_1 + 1} \right) G_1 \sigma_2^{\gamma_1}
+\end{eqnarray*}
+
+\begin{equation}
+	\boxed{f_1(r) = F_1 \left( \frac{F'_1 - F''_1 r}{F'''_1 - F''''_1 r} \right) g_1(r)}
+\end{equation}
+
+\begin{eqnarray*}
+	F_1 	& = & -\sqrt{\frac{1 - \epsilon_2}{1 + \epsilon_2}}  \\
+	F'_1 	& = & (2\gamma_1 + 1)(N_2 + 2)  \\
+	F''_1 	& = & (N_2 + 1)\sigma_2 \\
+	F'''_1 	& = & (2\gamma_1 + 1)N_2 \\ 
+	F''''_1 & = & (N_2 + 1)\sigma_2
+\end{eqnarray*}
+
+
+		%=================================================================
+		% The Second Excited State
+		%=================================================================
+		\subsubsection{The Second Excited State}
+\begin{equation}
+	\ket{2} = 
+		\left(
+			\begin{array}{c}
+				A_{21} g_2(r) \\
+				A_{22} g_2(r) \\
+				A_{23} f_2(r) \\
+				A_{24} f_2(r)
+			\end{array}
+		\right)
+		=
+		\left(
+			\begin{array}{c}
+				\sqrt{\frac{1}{3}} Y_{10} g_2(r) \\
+			    \sqrt{\frac{2}{3}} Y_{11} g_2(r) \\
+			    -i Y_{00} f_2(r) \\
+				0
+			\end{array}
+		\right)
+\end{equation}
+
+\begin{equation}
+	\boxed{
+		g_2(r) = e^{-\frac{1}{2}\sigma_2 r} r^{\gamma_1}
+				    \left(
+						G'_2 \frac{1}{r} - G''_2
+					\right) 
+	}
+\end{equation}
+
+\begin{eqnarray*}
+	G_2 	& = & \left( \frac{2Z}{N_2 a_0} \right)^{3/2}
+				  \sqrt{\frac{2\gamma_1 + 1}{\Gamma(2\gamma_1 + 1)}} 
+				  \sqrt{\frac{1+\epsilon_2}{4N_2 (N_2 - 1)}} \\
+	G'_2	& = & (N_2 - 2) \sigma_2^{\gamma_1 - 1} G_2 \\
+	G''_2 	& = & \left( \frac{N_2 - 1}{2\gamma_1 + 1} \right) \sigma_2^{\gamma_1} G_2
+\end{eqnarray*}
+
+\begin{equation}
+	\boxed{
+		f_2(r) = F_2 
+				 \left(
+				 	\frac{F'_2 - F''_2 r}{F'''_2 - F''''_2 r}
+				 \right) g_2(r)
+	}
+\end{equation}
+
+\begin{eqnarray*}
+	F_2		& = & -\sqrt{\frac{1-\epsilon_2}{1+\epsilon_2}} \\
+	F'_2	& = & (2\gamma_1 + 1)N_2 \\
+	F''_2 	& = & (N_2 - 1)\sigma_2 \\
+	F'''_2 	& = & (2\gamma_1 + 1)(N_2 - 2) \\
+	F''''_2 & = & (N_2 - 1)\sigma_2
+\end{eqnarray*}
+
+		%=================================================================
+		% The Third Excited State
+		%=================================================================
+		\subsubsection{The Third Excited State}
+\begin{equation}
+	\ket{3} = 
+		\left(
+			\begin{array}{c}
+				A_{31} g_3(r) \\
+				A_{32} g_3(r) \\
+				A_{33} f_3(r) \\
+				A_{34} f_3(r)
+			\end{array}
+		\right)
+		=
+		\left(
+			\begin{array}{c}
+				\sqrt{\frac{2}{3}} Y_{10} g_3(r) \\
+			   -\sqrt{\frac{1}{3}} Y_{11} g_3(r) \\
+			 -i \sqrt{\frac{2}{5}} Y_{20} f_3(r) \\
+			 -i \sqrt{\frac{3}{5}} Y_{21} f_3(r)
+			\end{array}
+		\right)
+\end{equation}
+
+\begin{equation}
+	\boxed{
+		g_3(r) = G_3 e^{-\frac{1}{2}\sigma_3 r}	r^{\gamma_2 - 1} 
+	 }
+\end{equation}
+
+\begin{eqnarray*}
+	G_3 & = & 	\left( \frac{Z}{a_0} \right)^{3/2}
+			  \sqrt{
+			  	\frac{1 + \epsilon_3}{2\Gamma(2\gamma_2 + 1)}
+			  }
+			  \sigma_3^{\gamma_2 - 1}
+\end{eqnarray*}
+
+\begin{equation}
+	\boxed{
+		f_3(r) = F_3 g_3(r)
+	}
+\end{equation}
+
+\begin{eqnarray*}
+	F_3 & = &  -\sqrt{
+					\frac{1 - \epsilon_3}{1 + \epsilon_3}
+				}
+\end{eqnarray*}
+
+	%================================================================
+	% HYDROGENIC FORM FACTOR
+	%================================================================
+
+\section{Hydrogenic Form Factor -- Normal Component}
+	\subsection{Non Relativistic Normal Form Factor}
+	Using the non relativistic Schr\"odinger equation, the ground state
+	wave-function for a hydrogenic atom is given by
+	equation~\ref{eq:schrodinger-ground}.
+	The corresponding electron density for the ground state is given by:
+	\begin{equation}
+		\rho(\mb{r}) = \psi_{1s}^{*} \psi_{1s} 
+					 = \frac{1}{\pi a_{0}^{3}} e^{-Zr/a_0}
+	\end{equation}
+	We know that for a hydrogenic atom we can assume spherical symmetry,
+	and therefore by substituting the charge density into
+	equation~\ref{eq:nff-spherical} we get the non relativistic normal 
+	form factor for hydrogenic atoms.
+	\begin{equation*}
+		f_0(q) = \frac{4}{q} \left( \frac{Z}{a_0} \right)^3
+				 \int_0^\infty e^{-2Zr/a_0} \sin(qr) r \; dr
+	\end{equation*}
+	\begin{equation}
+		\boxed{
+			f_0(q) = \left( \frac{2Z}{a_0} \right)^4 
+			     	 \left[ \left( \frac{2Z}{a_0} \right)^2 + q^2 \right]^{-2} 
+		}
+	\end{equation}
+
+	\subsection{Relativistic Normal Form Factor}
+	To compute the relativistic version of the normal form factor, we
+	need to use the Dirac four component spinors. As for the non
+	relativistic case we need to determine the electronic charge
+	density.
+	\begin{equation*}
+		\rho(\mb{r}) = \psi^{\dagger} \psi =
+			\left(
+				\begin{array}{cccc}
+					\psi_1^* & \psi_2^* & \psi_3^* & \psi_4^*	
+				\end{array}
+			\right)
+			\left(
+				\begin{array}{c}
+					\psi_1 \\
+					\psi_2 \\
+					\psi_3 \\
+					\psi_4
+				\end{array}
+			\right)
+			= |\psi_1|^2 + |\psi_2|^2 + |\psi_3|^2 + |\psi_4|^2
+	\end{equation*}
+	Using the ground state solution to the Dirac equation for hydrogenic
+	atoms given by equation~\ref{eq:dirac-ground}, the electron density
+	is given by:
+	\begin{eqnarray*}
+		\rho(\mb{r}) & = & 	|g_0(r) Y_{00}|^2 + 
+							\frac{1}{3} |i f_0(r) Y_{10}|^2 +
+							\frac{2}{3} |i f_0(r) Y_{11}|^2
+		\\
+		\rho(\mb{r}) & = & 	\frac{1}{4\pi} |g_0(r)|^2 +
+							\frac{1}{4\pi} |f_0(r) \cos \theta|^2  +
+							\frac{1}{4\pi} |f_0(r) \sin \theta \; e^{i\phi}|^2 
+		\\
+		\rho(\mb{r}) & = & 	\frac{1}{4\pi} 
+							\left(
+								|g_0(r)|^2 + |f_0(r)|^2
+							\right)
+	\end{eqnarray*}
+	The radial function $g_0(r)$ and $f_0(r)$ are defined by
+	equations~\ref{eq:dirac-g0} and~\ref{eq:dirac-f0} respectively. Once again
+	using the assumption that a hydrogenic atom is spherically symmetric we
+	substitute the electron density $\rho$ into the normal form factor equation
+	given by~\ref{eq:nff-spherical}.
+	\begin{eqnarray*}
+		f_0(q) &=& 	\frac{1}{q} 
+					\int_0^\infty \sin (qr) r 
+					\left(
+						|g_0(r)|^2 + |f_0(r)|^2
+					\right) \; dr
+		\\
+			    &=&	\frac{2}{q(1 + \epsilon_1)} 
+					\int_0^\infty r |g_1(r)|^2 \sin (qr) \; dr
+		\\
+				&=& \frac{1}{q \; \Gamma(2\gamma_1 + 1)}
+					\left(
+						\frac{2Z}{a_0}	
+					\right)^{2\gamma_1 + 1}
+					\int_0^\infty r^{2\gamma_1 - 1} e^{-2Zr/a_0} \sin (qr) \; dr
+		\\
+				&=& \frac{1}{2iq \Gamma(2\gamma_1 + 1)}
+					\left(
+						\frac{2Z}{a_0}
+					\right)^{2\gamma_1 + 1}
+					\left[
+						\int_0^\infty r^{2\gamma_1-1} e^{-(2Z/a_0 - iq)r} \; dr
+					-
+						\int_0^\infty r^{2\gamma_1-1} e^{-(2Z/a_0 + iq)r} \; dr
+					\right]
+	\end{eqnarray*}
+	These integrals can be solved because they are of the standard form
+	\[
+		\int_0^\infty x^n e^{-ax} \; dx = \frac{\Gamma(n+1)}{a^{n+1}}.
+	\]
+	Solving the integrals and after some algebraic manipulation, the
+	relativistic normal form factor for hydrogenic atoms is found to be:
+	\begin{equation} \label{eq:nff-relativistic}
+		\boxed{
+			f_0(q) = 
+			\frac{\Gamma(2\gamma_1)}{2iq \Gamma(2\gamma_1+1)}
+			\left(
+				\frac{2Z}{a_0}
+			\right)^{2\gamma_1 + 1}
+			\left[
+				\frac{
+					\left(
+						\frac{2Z}{a_0} + iq
+					\right)^{2\gamma_1}
+					-
+					\left(
+						\frac{2Z}{a_0} - iq
+					\right)^{2\gamma_1}
+				} {
+					\left[
+						\left(
+							\frac{2Z}{a_0} 
+						\right)^2	
+						+ q^2
+					\right]^{2\gamma_1}
+				}
+			\right]
+		}
+	\end{equation}
+
+	\subsection{Comparing the Non Relativistic and Relativistic Results}
+	The relativistic normal form factor in equation~\ref{eq:nff-relativistic}
+	can be compared to the non relativistic case by considering a binomial
+	expansion of the two terms in the numerator containing complex components.
+	\begin{equation*} 
+		(a \pm iq)^n \approx a^n \pm ina^{n-1}q + ...
+	\end{equation*}
+	Using this in equation~\ref{eq:nff-relativistic} we obtain:
+	\begin{equation*}
+		2 \gamma_1 \frac{\Gamma(2\gamma_1)}{\Gamma(2\gamma_1 + 1)} 
+		\left(
+			\frac{2Z}{a_0}
+		\right)^{4\gamma_1}
+			\left[
+				\left(
+					\frac{2Z}{a_0}
+				\right)^2 + q^2
+			\right]^{-2\gamma_1}
+	\end{equation*}
+	In the non relativistic limit we have the case of 
+	$\gamma_1 = \sqrt{1 - \alpha^2 Z^2} \approx 1$ and as such the result above
+	reduces the normal form factor as obtained using the Schr\"odinger
+	wave-functions.
+	\begin{equation*}
+		f_0(q) \approx
+		2 \frac{\Gamma(2)}{\Gamma(3)}
+		\left(
+			\frac{2 Z}{a_0}
+		\right)^4
+			\left[
+				\left(
+					\frac{2 Z}{a_0}
+				\right)^2 + q^2
+			\right]^{-2}
+		=
+		\left(
+			\frac{2Z}{a_0}
+		\right)^4
+			\left[
+				\left(
+					\frac{2Z}{a_0}
+				\right)^2 + q^2
+			\right]^{-2}
+	\end{equation*}
+
+	%===================================================
+	% HYDROGENIC FORM FACTOR - ANOMALOUS COMPONENT 
+	%===================================================
+\section{Hydrogenic Form Factor - Anomalous Component}
+	\begin{equation}
+		A = -r_0 mc^2 \sum_p^{unocc.} 
+			\left[
+				\frac{\bra{n} A_f^* \ket{p} \bra{p} A_i \ket{n} }
+					 {E_n - E_p + \hbar \omega + i0_+}
+				+
+				\frac{\bra{n} A_i \ket{p} \bra{p} A_f^* \ket{n} }
+					 {E_n - E_p - \hbar \omega - i0_+}
+			\right]
+	\end{equation}
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% BOUND-CONTINUUM SCATTERING AMPLITUDE
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\subsection{Bound-Continuum Scattering Amplitude}
+
+	\subsubsection{Assumptions}
+	The case to the bound-continuum scattering amplitude is considered when
+	modeling the the ejection of of an electron from the bound state of an atom
+	due to an energetic photon. In other words we are looking at the quantum
+	mechanical model of photoionisation or the photo-electric effect.
+
+	Here, we will consider the case of a single electron atom in its ground
+	state being ionised by an energetic photon, making the assumptions that
+	\begin{itemize}
+	\item The incident photon is traveling in the $+z$ direction with a
+	momentum wave-vector of $\mb{k}$, and it is polarised in the $x$ direction.
+	\item The single bound electron is initially in a spin up state, remains in
+	a spin up state once ejected and has a rest mass energy of $E_0 = mc^2$.
+	\item The electron once ejected has a momentum wave-vector of $\mb{k'}$ and
+	has energy $E$ defined by $E^2 = E_0^2 + ( \hbar k' c)^2$, where $k'$ is the
+	magnitude of $\mb{k'}$, defined as $k' = \sqrt{k_x^2 + k_y^2 + k_z^2}$.
+	\item The ground state of the atom and the free electron will be described
+	using the relativistic four component spinor formalism.
+	\end{itemize}
+
+	The ground state of the hydrogenic atom is represented by the four spinor in
+	equation~\ref{eq:dirac-ground}. The free electron, is represented by the
+	continuum state $\psi_c$ specified in the four spinor below:
+	\begin{equation} \label{eq:continuum}
+		\psi_c = \ket{c} =  e^{i \mb{k'} \cdot \mb{r} }
+		\left(
+			\begin{array}{c}
+				u_1										\\
+				u_2										\\
+				\xi k'_z u_1 + \xi (k'_x - ik'_y) u_2	\\
+				\xi (k'_x + ik'_y)u_1 - \xi k'_z u_2	\\
+			\end{array}
+		\right)
+	\end{equation}
+	where we have the following definitions:
+	\begin{equation}
+		\xi = \frac{c \hbar}{E + E_0}
+	\end{equation}
+	\begin{equation}
+		e^{i \mb{k'} \cdot \mb{r}} =
+		e^{k'_x x + k'_y y + k'_z z}
+	\end{equation}
+	For the case of the ejected electron being in a spin up state:
+	\begin{equation}
+		u_{\uparrow} = 
+		\left(
+			\begin{array}{c}
+				u_1	\\
+				u_2
+			\end{array}
+		\right)
+		=
+		\left(
+			\begin{array}{c}
+				\cos \frac{\theta}{2} 	\\
+				\sin \frac{\theta}{2} \; e^{i\phi} 
+			\end{array}
+		\right)
+	\end{equation}
+
+	\subsubsection{The Photo-electric Matrix Element}
+	We define the relativistic photo-electric matrix element as follows:
+	\begin{eqnarray}
+		P_{ab} & = & \left\langle a \left|
+						\sum_i e^{\mb{k}\cdot r_i} \alpha_j^{(i)} 
+					\right| b \right\rangle \\
+		P_{ab} & = & \int a^{\dagger}
+						\sum_i e^{\mb{k}\cdot r_i} \alpha_j^{(i)} 
+					b  \; d^3\mb{r}
+	\end{eqnarray}
+	where $\ket{b}$ represents the initial state of the atom, and $\ket{a}$
+	represents the ejected electron. For hydrogenic atoms, since we only have
+	one electron, the sum is over only this single electron. The polarisation of
+	the incident photon is specified by the Dirac alpha matrix in the $j$
+	direction, $\alpha_j$. Since we have already assumed that the photon is
+	polarised in the $x$ direction then:
+	\begin{equation*}
+		\alpha_x = 
+		\left(
+			\begin{array}{cccc}
+				0 & 0 & 0 & 1	\\
+				0 & 0 & 1 & 0 	\\
+				0 & 1 & 0 & 0	\\
+				1 & 0 & 0 & 0 	\\
+			\end{array}
+		\right)
+	\end{equation*}
+	which implies that the matrix element becomes:
+	\begin{equation*}
+		P_{ab} = 
+		\int
+			\bra{a} e^{i\mb{k}\cdot \mb{r}} \alpha_x \ket{b}
+		\; d^3 \mb{r}
+		=
+		\int
+			\left(
+				\begin{array}{cccc}
+					a_1^* &	a_2^* & a_3^* & a_4^*  
+				\end{array}
+			\right)
+			e^{i \mb{k} \cdot \mb{r}}
+			\left(
+				\begin{array}{cccc}
+				0 & 0 & 0 & 1	\\
+				0 & 0 & 1 & 0 	\\
+				0 & 1 & 0 & 0	\\
+				1 & 0 & 0 & 0 	\\
+				\end{array}
+			\right)
+			\left(
+				\begin{array}{c}
+					b_1 \\
+					b_2 \\
+					b_3 \\
+					b_4
+				\end{array}
+			\right)
+		\; d^3 \mb{r}
+	\end{equation*}
+	\begin{equation}
+		P_{ab} = 
+		\int
+			a_1^* e^{i \mb{k} \cdot \mb{r}} b_4 + 
+			a_2^* e^{i \mb{k} \cdot \mb{r}} b_3 + 
+			a_3^* e^{i \mb{k} \cdot \mb{r}} b_2 + 
+			a_4^* e^{i \mb{k} \cdot \mb{r}} b_1 
+		\; d^3 \mb{r}
+	\end{equation}
+	After knowing the general form of the matrix element, we can make some
+	definitions for some commonly occurring expressions to simplify the
+	calculations.
+	We first consider the momentum transfer between the photon and the electron.
+	We can define a vectorial form as follows:
+	\begin{equation}
+		\mb{q} = \mb{k} - \mb{k'}
+	\end{equation}
+	This also implies the momentum transfer in a particular coordinate
+	direction, that is $q_i = k_i - k'_i$ where $i = \{x,y,z\}$.
+	Making use of spherical polar coordinates ($x = r \sin\phi \cos\theta,
+	y = r \sin\phi \sin\theta, z = r \cos\phi$), we can make the following
+	definition:
+	\begin{equation*}
+		\tau(\mb{q},\mb{r}) = e^{i \mb{q} \cdot \mb{r}} 
+							= e^{i(q_x x + q_y y + q_z z)} 
+							= e^{ir(q_x \sin\phi\cos\theta +
+									q_y \sin\phi\sin\theta +
+									q_z \cos\phi)}
+	\end{equation*}
+	From this expression we can make the two useful function definitions:
+	\begin{eqnarray}
+		\mu = \mu(\mb{q},\theta,\phi) & = & q_x \sin\phi\cos\theta +
+								  	  q_y \sin\phi\sin\theta +
+								  	  q_z \cos\phi	\\
+		\tau = \tau(\mb{q},\mb{r}) & = & e^{ir \mu(\mb{q},\theta,\phi)}
+	\end{eqnarray}
+	
+	Now to solve the matrix element we substitute in for the state $\ket{b}$ the
+	ground state of the hydrogen atom as represented by the four spinor in
+	equation~\ref{eq:dirac-ground}, and for the state $\ket{a}$ by the continuum
+	state represented by equation~\ref{eq:continuum}.
+	The second component of the spinor representing the ground state is zero so
+	the matrix element becomes:
+	\begin{eqnarray*}
+		P_{ab} & = & 
+		\int
+			a_1^* e^{i \mb{k} \cdot \mb{r}} b_4 + 
+			a_2^* e^{i \mb{k} \cdot \mb{r}} b_3 + 
+			a_4^* e^{i \mb{k} \cdot \mb{r}} b_1 
+		\; d^3 \mb{r} \\
+		P_{ab} & = & P_1 + P_2 + P_3
+	\end{eqnarray*}
+	Therefore, the problem is reduced to determining the three integrals, each
+	one handled separately, and then combined together at the end.
+
+	\subsubsection{First Component}
+	The spinor components for the first integration are:
+	\begin{eqnarray*}
+		a_1^* & = & e^{-i \mb{k'} \cdot \mb{r} } \cos \frac{\theta}{2} \\
+		b_4   & = & -i \sqrt{\frac{2}{3}} f_0(r) Y_{11}
+	\end{eqnarray*}
+	Substituting these into the integral, with the polar form of the spherical
+	harmonic $Y_{11}(\theta,\phi)$ and then making use of the definition of
+	$\mu(\mb{q},\theta,\phi)$ we obtain:
+	\begin{eqnarray*}
+	P_1 & = & i \sqrt{\frac{2}{8 \pi}} \int e^{i (\mb{k} - \mb{k'}) \cdot \mb{r} }
+				\cos\frac{1}{2}\theta \sin\theta \, e^{i\phi} f_0(r)
+			  \; d^3 \mb{r} \\
+	P_1 & = & i \sqrt{\frac{2}{8 \pi}} \int e^{i \mu r}
+				\cos\frac{1}{2}\theta \sin\theta \, e^{i\phi} f_0(r)
+			    \; d^3 \mb{r} 
+	\end{eqnarray*}
+	Now converting to polar coordinates $P_1$ becomes:
+	\begin{equation*}
+	P_1  =  i \sqrt{\frac{2}{8\pi}}
+				\int_0^\infty
+				\int_0^{\pi}
+				\int_0^{2\pi}
+					r^2 f_0(r) e^{i \mu r} e^{i\phi} 
+					\cos\frac{1}{2}\theta \sin^2 \theta 
+				\; dr 
+				\; d\theta 
+				\; d\phi 
+	\end{equation*}
+	Ideally, we would like to have an analytic solution for this integral.
+	However, if we try to do the angular ($\theta,\phi$) integrals first, we see
+	that they are not possible to solve analytically. This is due to the
+	fact that $\mu$ is a complicated trigonometric function. The alternative is
+	to try to do the radial integral first, which appears that it can be solved
+	analytically.
+	Considering only the radial component of $P_1$, and substituting for the
+	radial function $f_0(r)$ we obtain:
+	\begin{eqnarray*}
+	P_{1r} & = & - \sigma_1^{\gamma_1 - 1} \left( \frac{2Z}{a_0} \right)^{3/2}
+			 \sqrt{ \frac{1-\epsilon_1}{2 \Gamma(2\gamma_1 + 1) } }
+			 \int_0^\infty
+		 	 e^{i\mu r} e^{-\frac{1}{2} \sigma_1 r} r^{\gamma_1 - 1} r^2 
+			 \; dr \\
+	P_{1r} & = & -\sigma_1^{\gamma_1 -1 } \left(\frac{2Z}{a_0} \right)^{3/2}
+			\sqrt{\frac{1-\epsilon_1}{2\Gamma(2\gamma_1 + 1)}}
+			\int_0^\infty 
+				e^{-ar} r^{\gamma_1 + 1}
+			\; dr
+	\end{eqnarray*}
+	where $a = \frac{1}{2}\sigma_1 - i\mu$. This is a standard integral 
+	($\int_0^\infty e^{-ax} x^n = \Gamma(n+1)/a^{n+1}$), and therefore
+	we obtain:
+	\begin{equation*}
+	P_{1r} = -\sigma_1^{\gamma_1-1} \left( \frac{2Z}{a_0} \right)^{3/2}
+			 \sqrt{\frac{1 - \epsilon_1}{2\Gamma(2\gamma_1 + 1)} }
+			 \frac{\Gamma(\gamma_1 + 2)}{
+			 	\left(
+					\frac{1}{2} \sigma_1 - i\mu
+				\right)^{\gamma_1 + 2}
+			 }
+	\end{equation*}
+	We can now define a group of constant that will appear in all three
+	components.
+	\begin{equation*}
+	\boxed{
+		P_0 = \sigma_1^{\gamma_1 - 1} \Gamma(\gamma_1 + 2)
+				\left( \frac{2Z}{a_0} \right)^{3/2}
+				\sqrt{ \frac{1 - \epsilon_1}{8 \pi \Gamma(2\gamma_1 + 1)} }
+	}
+	\end{equation*}
+	Now substituting this result back into the equation for $P_1$ together with
+	the angular integrals, and after some simplification we obtain:
+	\begin{equation}
+	\boxed{
+		P_1 = -i P_0
+		\int_0^{\pi} \int_0^{2\pi}
+			\frac{
+				e^{i\phi} \cos\left( \frac{\theta}{2} \right) \sin^2(\theta)
+			}{
+				\left(
+					\frac{1}{2}\sigma_1 - i\mu(\mb{q},\theta,\phi)
+				\right)^{\gamma_1 + 2}
+			}
+		\; d\phi \; d\theta
+	}
+	\end{equation}
+	Once again, due to the fact that $\mu(\mb{q},\theta,\phi)$ is a complicated
+	trigonometric function, and because $\gamma_1$ is not an integer, the
+	angular integrals cannot be solved analytically; however numerical integrals
+	are possible.
+
+	\subsubsection{Second Component}
+	\begin{equation}
+	\boxed{
+	P_2 = i P_0
+		  \int_0^{\pi} \int_0^{2\pi}
+		  	\frac{
+				e^{-i \phi} 
+				\sin(\theta) \sin\left(\frac{\theta}{2}\right) \cos(\theta)
+			}{
+				\left(
+					\frac{1}{2}\sigma_1 - i\mu( \mb{q},\theta,\phi)
+				\right)^{\gamma_1 + 2}
+			}
+		  \; d\phi \; d\theta
+	}
+	\end{equation}
+
+	\subsubsection{Third Component}
+	\begin{equation}
+	\boxed{
+	P_3 = \xi P_0
+		  \int_0^{\pi} \int_0^{2\pi}
+		  	\frac{
+				\sin( \theta)
+				\left[
+					(k'_x - ik'_y) \cos \left( \frac{\theta}{2} \right)
+					- k'_z \sin \left( \frac{\theta}{2} \right) e^{-i\phi}
+				\right]
+			}{
+				\left( 
+					\frac{1}{2} \sigma_1 - i\mu( \mb{q},\theta,\phi)
+				\right)^{\gamma_1 + 2}
+			}
+		  \; d\phi \; d\theta
+	}
+	\end{equation}
+
+	\subsubsection{Combined Result}
+
+	\subsection{Bound-Bound Scattering Amplitudes}
+
+%==============================================================
+% Helium
+\chapter{Helium-like Atoms}
+%==============================================================
+
+%==============================================================
+% Conclusions
+\chapter{Conclusions}
+%==============================================================
+
+
+\end{document}
+

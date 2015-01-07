@@ -1,0 +1,87 @@
+
+\section{Ground State to an Excited Bound State}
+We mentioned in Chapter 5 that ideally the total cross section would have both
+amplitudes corresponding to ground-continuum transitions and bound-bound
+transitions. The first step that is required is to calculate a photoabsorption
+matrix element from the ground state to one of the excited bound
+states of hydrogen. 
+
+This chapter provides semi analytic results for photoabsorption matrix elements
+from the ground state to the first three excited states of hydrogen.
+We will consider the the relativistic absorption operator $\mathcal{A} = \Alpha_x \Exp{k}{r}
+= \Alpha_x e^{i\eta(\mb{k},\theta,\phi)r}$ for a photon polarised in the $x$
+direction and we define $\eta$ as:
+\begin{equation}
+    \eta(\mb{k},\theta,\phi) = k_x \sin\phi \cos\phi +
+                               k_y \sin\phi \sin\theta +
+                               k_z \cos\phi
+\end{equation}
+In the electric dipole approximation $\mb{k} = 0$ and hence $\eta = 0$. 
+The use of $\eta$ allows us to separate the angular and radial integrals
+therefore writing the photoabsorption matrix element from the ground
+state $\ket{\psi_0}$ to an excited bound state $\ket{\psi_i}$ as:
+\begin{equation}
+    \bra{\psi_i} X \ket{\psi_0}
+    =
+    \int (A_{i1}A_{01} + A_{ii}A_{0i}) R^g_{0i} \; d\Omega
+    +
+    \int (A_{i3}A_{03} + A_{i4}A_{04}) R^h_{0i} \; d\Omega
+\end{equation}
+where $A_{ij}(\theta,\phi)$ are the angular components of the excited 
+state Dirac spinors as defined in Chapter 2.
+$R^g_{0i}$ and $R^h_{0i}$ are the large and small component radial 
+integrals which are defined in the sections below for each excited state.
+Some of the radial integrals are analytic while others have to be solved
+numerically. The final integration over all angles $ d\Omega $ has to 
+be performed numerically.
+
+All the radial integrals are written in terms of the constants defined in
+Chapter 2 and in terms of the integrals $\mathcal{J}$ and $\mathcal{K}$ 
+defined below.
+\begin{equation}
+    \mathcal{J}[a,n] = \int_0^\infty e^{-ar} r^n \; dr
+\end{equation}
+\begin{equation}
+    \mathcal{K}[a,n,A,B,C,D] = \int_0^\infty 
+                \left( \frac{A-Br}{C-Dr} \right) e^{-ar} r^{n} \; dr
+\end{equation}
+
+\section{Ground State to First Excited State}
+\begin{equation}
+R^g_{01} = G_0 G'_1 \mathcal{J}[\Half(\sigma_1 + \sigma_2) - i\eta,2\gamma_1] -
+           G_0 G''_1 \mathcal{J}[\Half(\sigma_1 + \sigma_2) - i\eta,2\gamma_1 + 1]
+\end{equation}
+
+\begin{equation}
+\begin{split}
+R^h_{01} = H_0 G_0 H_1 
+            G'_1 \mathcal{K}[\Half(\sigma_1 + \sigma_2) - i\eta, 2\gamma_1,H'_1,H''_1,H'''_1,H''''_1]
+            \\ -
+   H_0 G_0 H_1          G''_1 \mathcal{K}[\Half(\sigma_1 + \sigma_2) - i\eta, 2\gamma_1,  1H'_1,H''_1,H'''_1,H''''_1]
+\end{split}
+\end{equation}
+
+\section{Ground State to Second Excited State}
+\begin{equation}
+R^g_{02} = G_0 G'_2 \mathcal{J}[\Half(\sigma_1 + \sigma_2) - i\eta,2\gamma_1] -
+           G_0 G''_2 \mathcal{J}[\Half(\sigma_1 + \sigma_2) - i\eta,2\gamma_1 + 1]
+\end{equation}
+
+\begin{equation}
+\begin{split}
+R^h_{02} = H_0 G_0 H_2 
+            G'_1 \mathcal{K}[\Half(\sigma_1 + \sigma_2) - i\eta, 2\gamma_1,H'_2,H''_2,H'''_2,H''''_2]
+            \\ - 
+   H_0 G_0 H_2          G''_1 \mathcal{K}[\Half(\sigma_1 + \sigma_2) - i\eta, 2\gamma_1, 1H'_2,H''_2,H'''_2,H''''_2]
+\end{split}
+\end{equation}
+
+\section{Ground State to Third Excited State}
+\begin{equation}
+R^g_{03} = G_0 G_3 \mathcal{J}[\Half(\sigma_1 + \sigma_3) - i\eta, \gamma_1 + \gamma_2]
+\end{equation}
+
+\begin{equation}
+R^h_{03} = H_0 G_0 H_3 G_3 \mathcal{J}[\Half(\sigma_1 + \sigma_3) - i\eta, \gamma_1 + \gamma_2]
+\end{equation}
+

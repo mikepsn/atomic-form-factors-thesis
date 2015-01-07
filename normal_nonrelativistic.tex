@@ -1,0 +1,29 @@
+
+\section{Non Relativistic Theory}
+
+    Using the non relativistic Schr\"odinger equation, the ground state
+    wave-function for a hydrogenic atom is given by
+    equation~\ref{eq:schrodinger-ground}.
+    The corresponding electron density for the ground state is given by
+    \(
+        \rho(\mb{r}) = \psi_{1s}^{*} \psi_{1s} 
+                     = \frac{1}{\pi a_{0}^{3}} e^{-Zr/a_0}
+    \).
+    We know that for a hydrogenic atom we can assume spherical symmetry,
+    and therefore by substituting the charge density into
+    equation~\ref{eq:nff-spherical} we get the non relativistic normal 
+    form factor for hydrogenic atoms.
+    \begin{equation*}
+        f_0(q) = \frac{4}{q} \left( \frac{Z}{a_0} \right)^3
+                 \int_0^\infty e^{-2Zr/a_0} \sin(qr) r \; dr
+    \end{equation*}
+    \begin{equation} \label{eq:nff-nonrelativistic}
+        \boxed{
+            f_0(q) = \left( \frac{2Z}{a_0} \right)^4 
+                     \left[ \left( \frac{2Z}{a_0} \right)^2 + q^2 \right]^{-2} 
+        }
+    \end{equation}
+    Here we have $q = 4\pi \sin(\theta/2)/\lambda$ $\InvAngstrom$ as stated earlier. This
+    result was has also been obtained by Hubbell~\cite{Hubbell-1975} and
+    Pirenne~\cite{Pirenne}, however in a slightly modified form due to a
+    different definition of $q$ which does not include the factor of $4\pi$.
